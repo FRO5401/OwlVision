@@ -1,6 +1,6 @@
-# FRCVision-pi-gen
+# OwlVision
 
-_Tool used to create the FRCVision Raspbian image_
+_Tool used to create the OwlVision Raspbian image_
 
 
 ## Dependencies
@@ -32,11 +32,11 @@ environment variables.
 
 The following environment variables are supported:
 
- * `IMG_NAME` **required** (Default: `'FRCVision'`)
+ * `IMG_NAME` **required** (Default: `'OwlVision'`)
 
    The name of the image to build with the current stage directories.  Setting
-   `IMG_NAME=FRCVision` is logical for an unmodified
-   wpilibsuite/FRCVision-pi-gen build, but you should use something else for a
+   `IMG_NAME=OwlVision` is logical for an unmodified
+   FRO5401/OwlVision build, but you should use something else for a
    customized version.  Export files in stages may add suffixes to `IMG_NAME`.
 
  * `APT_PROXY` (Default: unset)
@@ -77,11 +77,11 @@ The following environment variables are supported:
    Setting to '1' enables the QEMU mode - creating an image that can be mounted via QEMU for an emulated
    environment. These images include "-qemu" in the image file name.
 
- * `FIRST_USER_NAME` (Default: "pi" )
+ * `FIRST_USER_NAME` (Default: "fro" )
 
    Username for the first user
 
- * `FIRST_USER_PASS` (Default: "raspberry")
+ * `FIRST_USER_PASS` (Default: "team5401")
 
    Password for the first user
 
@@ -93,10 +93,10 @@ The following environment variables are supported:
 
    Setting to `1` will enable ssh server for remote log in. Note that if you are using a common password such as the defaults there is a high risk of attackers taking over you RaspberryPi.
 
-A simple example for building FRCVision:
+A simple example for building OwlVision:
 
 ```bash
-IMG_NAME='FRCVision'
+IMG_NAME='OwlVision'
 ```
 
 The config file can also be specified on the command line as an argument the `build.sh` or `build-docker.sh` scripts.
@@ -155,7 +155,7 @@ It is recommended to examine build.sh for finer details.
 ## Docker Build
 
 ```bash
-vi config         # Edit your config file. See above.
+nano config         # Edit your config file. See above.
 ./build-docker.sh
 ```
 
@@ -185,9 +185,9 @@ solution).
 
 ## Stage Anatomy
 
-### FRCVision Raspbian Stage Overview
+### OwlVision Raspbian Stage Overview
 
-The build of FRCVision Raspbian is divided up into several stages for logical
+The build of OwlVision Raspbian is divided up into several stages for logical
 clarity and modularity.  This causes some initial complexity, but it simplifies
 maintenance and allows for more easy customization.
 
@@ -226,10 +226,10 @@ maintenance and allows for more easy customization.
    dependencies.  The RobotPy NetworkTables and CameraServer libraries are
    also built and installed here.
 
- - **Stage 4** - The official FRCVision image.  Adds multi camera builtin
-   application and services, the FRCVision web dashboard, and example vision
-   programs.  This is the stage that builds and installs all of the things that
-   make FRCVision friendly to new users.
+ - **Stage 4** - The FRCVision image with OwlVision modification.  Adds multi camera builtin
+   application and services, the OwlVision web dashboard, example vision
+   programs, and GStreamer builtin streaming.  This is the stage that builds and installs all of the things that
+   make OwlVision friendly to new users.
 
 ### Stage specification
 

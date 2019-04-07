@@ -156,12 +156,12 @@ export WORK_DIR="${WORK_DIR:-"${BASE_DIR}/work/${IMG_DATE}-${IMG_NAME}"}"
 export DEPLOY_DIR=${DEPLOY_DIR:-"${BASE_DIR}/deploy"}
 export LOG_FILE="${WORK_DIR}/build.log"
 
-export FIRST_USER_NAME=${FIRST_USER_NAME:-pi}
-export FIRST_USER_PASS=${FIRST_USER_PASS:-raspberry}
+export FIRST_USER_NAME=${FIRST_USER_NAME:-fro}
+export FIRST_USER_PASS=${FIRST_USER_PASS:-team5401}
 export WPA_ESSID
 export WPA_PASSWORD
 export WPA_COUNTRY
-export ENABLE_SSH="${ENABLE_SSH:-0}"
+export ENABLE_SSH="${ENABLE_SSH:-1}"
 
 export BASE_DIR
 

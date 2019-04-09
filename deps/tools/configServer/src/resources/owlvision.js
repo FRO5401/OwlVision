@@ -143,7 +143,7 @@ function connect() {
   if (window.location.port !== '') {
     serverUrl += ':' + window.location.port;
   }
-  connection = new WebSocket(serverUrl, 'frcvision');
+  connection = new WebSocket(serverUrl, 'owlvision');
   connection.onopen = function(evt) {
     if (reconnectTimerId) {
       window.clearInterval(reconnectTimerId);

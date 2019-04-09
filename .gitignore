@@ -12,3 +12,9 @@ deps/tools/setuidgids/setuidgids
 *.o
 *.sw?
 *.debug
+deps/tools/configServer/.idea/configServer.iml
+deps/tools/configServer/.idea/codeStyles/Project.xml
+deps/tools/configServer/.idea/misc.xml
+deps/tools/configServer/.idea/modules.xml
+deps/tools/configServer/.idea/vcs.xml
+deps/tools/configServer/.idea/workspace.xml

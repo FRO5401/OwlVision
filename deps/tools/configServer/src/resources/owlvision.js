@@ -759,10 +759,13 @@ var applicationFiles = [];
 function updateApplicationView() {
   if ($('#applicationType').val().startsWith("upload")) {
     $('#applicationUpload').collapse('show');
-    $('#applicationSaveText').text('Upload and Save');
+    $('#applicationSaveText').text('Upload and Save'); }
+  else if ($('#applicationType').val().startsWith("gstreamer")){
+    $('#gstreamerData').collapse('show');
   } else {
     $('#applicationUpload').collapse('hide');
     $('#applicationSaveText').text('Save');
+    $('#gstreamerData').collapse('hide');
   }
   $('#applicationFile').val(null);
   applicationFiles = [];

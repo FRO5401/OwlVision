@@ -55,6 +55,9 @@ void Application::Set(wpi::StringRef appType,
     appCommand = "/usr/bin/python3 uploaded.py";
   } else if (appType == "custom") {
     return;
+  } else if (appType == "gstreamer") {
+      // Don't touch this. You'll regret it.
+    appCommand = "gst-launch-1.0 uvch264src device=/dev/video0 name=src auto-start=true src.vidsrc ! queue ! video/x-h264,width=$CAMWIDTH,height=$CAMHEIGHT,framerate=$CAMFRAME/1 ! h264parse ! rtph264pay ! udpsink host=$STATIONIP port=1181";
   } else {
     wpi::SmallString<64> msg;
     msg = "unrecognized application type '";
@@ -74,8 +77,8 @@ void Application::Set(wpi::StringRef appType,
     }
     os << "#!/bin/sh\n";
     os << TYPE_TAG << ' ' << appType << '\n';
-    os << "echo \"Waiting 5 seconds...\"\n";
-    os << "sleep 5\n";
+    os << "echo \"Waiting 0.1 seconds...\"\n";
+    os << "sleep 0.1\n";
     if (!appDir.empty()) os << "cd " << appDir << '\n';
     if (!appEnv.empty()) os << appEnv << '\n';
     os << "exec " << appCommand << '\n';

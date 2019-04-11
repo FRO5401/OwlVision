@@ -485,6 +485,7 @@
                     <select class="form-control" id="applicationType">
                       <option value="builtin">Built-in multi-camera streaming</option>
                       <option value="custom">Custom</option>
+                      <option value="gstreamer">GStreamer</option>
                       <option value="example-java">Java example (must be built to work)</option>
                       <option value="example-cpp">C++ example (must be built to work)</option>
                       <option value="example-python">Python example</option>
@@ -499,6 +500,21 @@
                       <input type="file" class="form-control-file" id="applicationFile">
                     </div>
                   </div>
+                  <div class="collapse" id="gstreamerData">
+                    <div class="form-group">
+                      <label for="stationIP">Driver Station IP Address: </label>
+                      <input type="text" id="stationIP">
+                      <br>
+                      <label for="camWidth">Video Width: </label>
+                      <input type="text" id="camWidth">
+                      <br>
+                      <label for="camHeight">Video Height: </label>
+                      <input type="text" id="camHeight">
+                      <br>
+                      <label for="camFrame">Video Framerate: </label>
+                      <input type="text" id="camFrame">
+                  </div>
+                </div>
                   <button id="applicationSave" type="button" class="btn btn-primary" data-loading-text="<i class='spin' data-feather='loader'></i> Saving" disabled>
                     <span data-feather="save"></span>
                     <span id="applicationSaveText">Save</span>

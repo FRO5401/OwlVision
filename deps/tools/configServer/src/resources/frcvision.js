@@ -143,7 +143,7 @@ function connect() {
   if (window.location.port !== '') {
     serverUrl += ':' + window.location.port;
   }
-  connection = new WebSocket(serverUrl, 'owlvision');
+  connection = new WebSocket(serverUrl, 'frcvision');
   connection.onopen = function(evt) {
     if (reconnectTimerId) {
       window.clearInterval(reconnectTimerId);
@@ -784,7 +784,11 @@ $('#applicationFile').change(function() {
 $('#applicationSave').click(function() {
   var msg = {
     type: 'applicationSave',
-    applicationType: $('#applicationType').val()
+    applicationType: $('#applicationType').val(),
+    stationIP: $('#stationIP').val(),
+    camWidth: $('#camWidth').val(),
+    camHeight: $('#camHeight').val(),
+    camFrame: $('#camFrame').val()
   };
   connection.send(JSON.stringify(msg));
 
@@ -818,11 +822,7 @@ $('#applicationSave').click(function() {
         // done
         var msg = {
           type: 'applicationFinishUpload',
-          applicationType: $('#applicationType').val(),
-          stationIP: $('#stationIP').val(),
-          camWidth: $('#camWidth').val(),
-          camHeight: $('#camHeight').val(),
-          camFrame: $('#camFrame').val(),
+          applicationType: $('#applicationType').val()
         };
         connection.send(JSON.stringify(msg));
       }

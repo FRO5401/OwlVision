@@ -818,7 +818,11 @@ $('#applicationSave').click(function() {
         // done
         var msg = {
           type: 'applicationFinishUpload',
-          applicationType: $('#applicationType').val()
+          applicationType: $('#applicationType').val(),
+          stationIP: $('#stationIP').val(),
+          camWidth: $('#camWidth').val(),
+          camHeight: $('#camHeight').val(),
+          camFrame: $('#camFrame').val(),
         };
         connection.send(JSON.stringify(msg));
       }

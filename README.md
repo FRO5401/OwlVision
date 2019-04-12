@@ -1,4 +1,4 @@
-# OwlVision
+# OwlVision [![Build Status](https://jenkins.dfiel.org/job/OwlVision-WebUi/badge/icon)](https://jenkins.dfiel.org/job/OwlVision-WebUi/)
 
 _Tool used to create the OwlVision Raspbian image_
 

@@ -1,7 +1,7 @@
 IMG_VERSION?=$(shell git describe)
 DEPS_CFLAGS?=$(shell pkg-config --cflags cscore wpiutil)
 DEPS_LIBS?=$(shell pkg-config --libs --static cscore wpiutil)
-EXEC_HOME?=/home/pi
+EXEC_HOME?=/home/fro
 FRC_JSON?=/boot/frc.json
 DHCPCD_CONF?=/boot/dhcpcd.conf
 APP_UID?=1000

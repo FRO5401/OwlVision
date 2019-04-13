@@ -199,6 +199,10 @@ function connect() {
         break;
       case 'applicationSettings':
         $('#applicationType').val(msg.applicationType);
+        $('#stationIP').val(msg.stationIP);
+        $('#camWidth').val(msg.camWidth);
+        $('#camHeight').val(msg.camHeight);
+        $('#camFrame').val(msg.camFrame);
         updateApplicationView();
         break;
       case 'applicationSaveComplete':

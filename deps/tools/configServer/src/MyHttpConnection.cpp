@@ -225,7 +225,7 @@ void MyHttpConnection::ProcessRequest() {
                        wpi::GetResource_wpilib_128_png(), false);
   } else if (isGET && path.equals("/froicon.png")) {
       SendStaticResponse(200, "OK", "image/png",
-                         wpi::GetResource_froicon_png(), false);
+                         GetResource_froicon_png(), false);
   } else if (isGET && path.startswith("/") && path.endswith(".zip") &&
              !path.contains("..")) {
     SendFileResponse(200, "OK", "application/zip", wpi::Twine(ZIPS_DIR) + path);

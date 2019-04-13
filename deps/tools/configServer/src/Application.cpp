@@ -25,7 +25,7 @@ std::shared_ptr<Application> Application::GetInstance() {
   return inst;
 }
 
-void Application::Set(wpi::StringRef appType,
+void Application::Set(wpi::StringRef appType, wpi::StringRef gstEnv,
                       std::function<void(wpi::StringRef)> onFail) {
   wpi::StringRef appDir;
   wpi::StringRef appEnv;
@@ -56,7 +56,7 @@ void Application::Set(wpi::StringRef appType,
   } else if (appType == "custom") {
     return;
   } else if (appType == "gstreamer") {
-      // Don't touch this. You'll regret it.
+    // Don't touch this. You'll regret it.
     appCommand = "gst-launch-1.0 uvch264src device=/dev/video0 name=src auto-start=true src.vidsrc ! queue ! "
                  "video/x-h264,width=$CAMWIDTH,height=$CAMHEIGHT,framerate=$CAMFRAME/1 ! h264parse ! rtph264pay "
                  "! udpsink host=$STATIONIP port=1181";
@@ -83,6 +83,7 @@ void Application::Set(wpi::StringRef appType,
     os << "sleep 0.1\n";
     if (!appDir.empty()) os << "cd " << appDir << '\n';
     if (!appEnv.empty()) os << appEnv << '\n';
+    if (appType == "gstreamer") os << gstEnv << '\n';
     os << "exec " << appCommand << '\n';
   }
 
@@ -180,6 +181,35 @@ void Application::FinishUpload(wpi::StringRef appType, int fd,
   VisionStatus::GetInstance()->Terminate(onFail);
 }
 
+void Application::SaveGStreamerData(const wpi::json data) {
+    // write file
+    std::error_code ec;
+    wpi::raw_fd_ostream os(GST_JSON, ec, wpi::sys::fs::F_Text);
+    if (ec) {
+        onFail("could not write " GST_JSON);
+        return;
+    }
+    data.dump(os, 4);
+    os << '\n';
+}
+
+wpi::json Application::ReadGStreamerData() {
+    std::error_code ec;
+    wpi::raw_fd_istream is(GST_JSON, ec);
+    if (ec) {
+        wpi::errs() << "could not read " GST_JSON "\n";
+        return wpi::json();
+    }
+
+    try {
+        wpi::json j = wpi::json::parse(is);
+        return j;
+    } catch (wpi::json::exception& e) {
+        wpi::errs() << "could not parse " GST_JSON "\n";
+        return wpi::json();
+    }
+}
+
 void Application::UpdateStatus() { status(GetStatusJson()); }
 
 wpi::json Application::GetStatusJson() {
@@ -199,6 +229,13 @@ wpi::json Application::GetStatusJson() {
     wpi::StringRef line = is.getline(lineBuf, 256).trim();
     if (line.startswith(TYPE_TAG)) {
       j["applicationType"] = line.substr(strlen(TYPE_TAG)).trim();
+      if (j["applicationType"] == "gstreamer") {
+          if(ReadGStreamerData() == wpi::json()){
+              j["applicationType"] = "custom";
+          } else {
+              j = ReadGStreamerData();
+          }
+      }
       break;
     }
   }

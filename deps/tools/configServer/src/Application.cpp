@@ -193,7 +193,7 @@ void Application::SaveGStreamerData(const wpi::json data) {
     os << '\n';
 }
 
-wpi::json Application::ReadGStreamerData() {
+wpi::json Application::ReadGStreamerData(std::function<void(wpi::StringRef)> onFail) {
     std::error_code ec;
     wpi::raw_fd_istream is(GST_JSON, ec);
     if (ec) {

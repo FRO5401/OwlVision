@@ -38,8 +38,8 @@ class Application {
 
   void UpdateStatus();
 
-  wpi::json ReadGStreamerData(std::function<void(wpi::StringRef)> onFail);
-  void SaveGStreamerData(const wpi::json data);
+  wpi::json ReadGStreamerData();
+  void SaveGStreamerData(const wpi::json data, std::function<void(wpi::StringRef)> onFail);
 
   wpi::json GetStatusJson();
 

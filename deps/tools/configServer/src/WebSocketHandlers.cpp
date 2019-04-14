@@ -292,7 +292,7 @@ void ProcessWsText(wpi::WebSocket& ws, wpi::StringRef msg) {
 
     if (subType == "Save") {
         if(j.at("applicationType").get<std::string>() == "gstreamer") {
-            Application::GetInstance()->SaveGStreamerData(j);
+            Application::GetInstance()->SaveGStreamerData(j, statusFunc);
             wpi::StringRef gstEnv;
             std::string stationIP = j.at("stationIP").get<std::string>();
             std::string camWidth = j.at("camWidth").get<std::string>();

@@ -193,7 +193,7 @@ void Application::SaveGStreamerData(const wpi::json data, std::function<void(wpi
     os << '\n';
 }
 
-wpi::json Application::ReadGStreamerData(std::function<void(wpi::StringRef)> onFail) {
+wpi::json Application::ReadGStreamerData() {
     std::error_code ec;
     wpi::raw_fd_istream is(GST_JSON, ec);
     if (ec) {
@@ -231,7 +231,7 @@ wpi::json Application::GetStatusJson() {
       j["applicationType"] = line.substr(strlen(TYPE_TAG)).trim();
       if (j["applicationType"] == "gstreamer") {
           if(ReadGStreamerData() == wpi::json()){
-              j["applicationType"] = "custom";
+              j["applicationType"] = line.substr(strlen(TYPE_TAG)).trim();
           } else {
               j = ReadGStreamerData();
           }

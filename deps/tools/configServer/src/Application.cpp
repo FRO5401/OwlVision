@@ -181,7 +181,7 @@ void Application::FinishUpload(wpi::StringRef appType, int fd,
   VisionStatus::GetInstance()->Terminate(onFail);
 }
 
-void Application::SaveGStreamerData(const wpi::json data) {
+void Application::SaveGStreamerData(const wpi::json data, std::function<void(wpi::StringRef)> onFail) {
     // write file
     std::error_code ec;
     wpi::raw_fd_ostream os(GST_JSON, ec, wpi::sys::fs::F_Text);

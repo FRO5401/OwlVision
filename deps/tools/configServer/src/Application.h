@@ -28,7 +28,7 @@ class Application {
   Application(const Application&) = delete;
   Application& operator=(const Application&) = delete;
 
-  void Set(wpi::StringRef appType, wpi::StringRef gstEnv, std::function<void(wpi::StringRef)> onFail);
+  void Set(wpi::StringRef appType, std::string gstEnv, std::function<void(wpi::StringRef)> onFail);
 
   int StartUpload(wpi::StringRef appType, char* filename,
                   std::function<void(wpi::StringRef)> onFail);

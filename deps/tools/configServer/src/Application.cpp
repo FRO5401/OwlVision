@@ -25,7 +25,7 @@ std::shared_ptr<Application> Application::GetInstance() {
   return inst;
 }
 
-void Application::Set(wpi::StringRef appType, wpi::StringRef gstEnv,
+void Application::Set(wpi::StringRef appType, wstd::string gstEnv,
                       std::function<void(wpi::StringRef)> onFail) {
   wpi::StringRef appDir;
   wpi::StringRef appEnv;

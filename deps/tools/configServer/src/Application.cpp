@@ -231,7 +231,7 @@ wpi::json Application::GetStatusJson() {
       j["applicationType"] = line.substr(strlen(TYPE_TAG)).trim();
       if (j["applicationType"] == "gstreamer") {
           if(ReadGStreamerData() == wpi::json()){
-              j["applicationType"] = line.substr(strlen(TYPE_TAG)).trim();
+              break;
           } else {
               j = ReadGStreamerData();
           }

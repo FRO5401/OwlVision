@@ -294,15 +294,17 @@ void ProcessWsText(wpi::WebSocket& ws, wpi::StringRef msg) {
         std::string gstEnv;
         gstEnv = "";
         if(j.at("applicationType").get<std::string>() == "gstreamer") {
-            Application::GetInstance()->SaveGStreamerData(j, statusFunc);
+            auto gstData = j;
+            gstData["type"] = "applicationSettings";
+            Application::GetInstance()->SaveGStreamerData(gstData, statusFunc);
             std::string stationIP = j.at("stationIP").get<std::string>();
             std::string camWidth = j.at("camWidth").get<std::string>();
             std::string camHeight = j.at("camHeight").get<std::string>();
             std::string camFrame = j.at("camFrame").get<std::string>();
-            gstEnv = "export STATIONIP= " + stationIP +
-                     "CAMWIDTH= " + camWidth +
-                     "CAMHEIGHT= " + camHeight +
-                     "CAMFRAME= " + camFrame;
+            gstEnv = "export STATIONIP=" + stationIP +
+                     " CAMWIDTH=" + camWidth +
+                     " CAMHEIGHT=" + camHeight +
+                     " CAMFRAME=" + camFrame;
 
         }
       Application::GetInstance()->Set(appType, gstEnv, statusFunc);

@@ -1,5 +1,5 @@
 #!/bin/sh
 ### TYPE: builtin
-echo "Waiting 5 seconds..."
-sleep 5
+echo "Waiting 0.1 seconds..."
+sleep 0.1
 exec /usr/local/frc/bin/multiCameraServer

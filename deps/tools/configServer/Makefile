@@ -1,8 +1,8 @@
 IMG_VERSION?=$(shell git describe)
 DEPS_CFLAGS?=$(shell pkg-config --cflags cscore wpiutil)
 DEPS_LIBS?=$(shell pkg-config --libs --static cscore wpiutil)
-EXEC_HOME?=/home/fro
 FRC_JSON?=/boot/frc.json
+GST_JSON?=/boot/gst.json
 DHCPCD_CONF?=/boot/dhcpcd.conf
 APP_UID?=1000
 APP_GID?=1000
@@ -28,7 +28,8 @@ OBJS= \
     src/WebSocketHandlers.o \
     src/resources/index.html.o \
     src/resources/frcvision.css.o \
-    src/resources/frcvision.js.o
+    src/resources/frcvision.js.o \
+    src/resources/froicon.png.o
 
 configServer: ${OBJS}
 	${CXX} -pthread -g -o $@ ${CXXFLAGS} $^ ${DEPS_LIBS}
@@ -37,8 +38,9 @@ configServer: ${OBJS}
 	${CXX} -g -O -Wall -c -o $@ \
 	    ${CXXFLAGS} \
 	    ${DEPS_CFLAGS} \
-	    '-DEXEC_HOME="${EXEC_HOME}"' \
+	    '-DEXEC_HOME="/home/${FIRST_USER_NAME}"' \
 	    '-DFRC_JSON="${FRC_JSON}"' \
+	    '-DGST_JSON="${GST_JSON}"' \
 	    '-DDHCPCD_CONF="${DHCPCD_CONF}"' \
 	    '-DAPP_UID=${APP_UID}' \
 	    '-DAPP_GID=${APP_GID}' \
@@ -51,5 +53,8 @@ configServer: ${OBJS}
 	env IMG_VERSION=${IMG_VERSION} ./gen_resource.py $@ $<
 
 %.js.cpp: %.js
+	env IMG_VERSION=${IMG_VERSION} ./gen_resource.py $@ $<
+
+%.png.cpp: %.png
 	env IMG_VERSION=${IMG_VERSION} ./gen_resource.py $@ $<
 

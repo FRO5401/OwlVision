@@ -6,15 +6,15 @@
 
     <link rel="stylesheet" href="coreui.min.css">
     <link rel="stylesheet" href="frcvision.css">
-    <link rel="icon" type="image/png" sizes="128x128" href="wpilib.png">
+    <link rel="icon" type="image/png" sizes="128x89" href="froicon.png">
 
-    <title>WPILib FRCVision Raspberry PI Configuration</title>
+    <title>Team 5401 OwlVision Raspberry PI Configuration</title>
   </head>
   <body class="app header-fixed sidebar-md-show sidebar-fixed">
     <header class="app-header navbar">
       <a class="navbar-brand" href="#">
-        <img src="wpilib.png" class="img-fluid ml-2 mr-2 brand-icon" alt="WPILib">
-        FRCVision-rPi
+        <img src="froicon.png" class="img-fluid ml-2 mr-2 brand-icon" alt="WPILib">
+        OwlVision-rPi
       </a>
       <form class="form-inline">
         <div class="btn-group" role="group">
@@ -485,6 +485,7 @@
                     <select class="form-control" id="applicationType">
                       <option value="builtin">Built-in multi-camera streaming</option>
                       <option value="custom">Custom</option>
+                      <option value="gstreamer">GStreamer</option>
                       <option value="example-java">Java example (must be built to work)</option>
                       <option value="example-cpp">C++ example (must be built to work)</option>
                       <option value="example-python">Python example</option>
@@ -499,6 +500,21 @@
                       <input type="file" class="form-control-file" id="applicationFile">
                     </div>
                   </div>
+                  <div class="collapse" id="gstreamerData">
+                    <div class="form-group">
+                      <label for="stationIP">Driver Station IP Address: </label>
+                      <input type="text" id="stationIP">
+                      <br>
+                      <label for="camWidth">Video Width: </label>
+                      <input type="text" id="camWidth">
+                      <br>
+                      <label for="camHeight">Video Height: </label>
+                      <input type="text" id="camHeight">
+                      <br>
+                      <label for="camFrame">Video Framerate: </label>
+                      <input type="text" id="camFrame">
+                  </div>
+                </div>
                   <button id="applicationSave" type="button" class="btn btn-primary" data-loading-text="<i class='spin' data-feather='loader'></i> Saving" disabled>
                     <span data-feather="save"></span>
                     <span id="applicationSaveText">Save</span>
@@ -539,11 +555,11 @@
     </div>
     <footer class="app-footer">
       <div>
-        <a href="http://wpilib.screenstepslive.com/s/currentCS/m/85074/l/1027798-the-raspberry-pi-frc-console" target="_new">FRCVision-rPi</a>
+        <a href="https://github.com/FRO5401/OwlVision" target="_new">OwlVision-rPi</a>
         <span>&copy; 2019 FIRST</span>
       </div>
       <div class="ml-auto">
-        <a href="https://github.com/wpilibsuite/FRCVision-pi-gen/releases" target="_new">IMG_VERSION</a>
+        <a href="https://github.com/FRO5401/OwlVision" target="_new">IMG_VERSION</a>
       </div>
     </footer>
 

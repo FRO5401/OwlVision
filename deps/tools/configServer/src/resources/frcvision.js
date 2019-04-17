@@ -199,6 +199,10 @@ function connect() {
         break;
       case 'applicationSettings':
         $('#applicationType').val(msg.applicationType);
+        $('#stationIP').val(msg.stationIP);
+        $('#camWidth').val(msg.camWidth);
+        $('#camHeight').val(msg.camHeight);
+        $('#camFrame').val(msg.camFrame);
         updateApplicationView();
         break;
       case 'applicationSaveComplete':
@@ -759,10 +763,13 @@ var applicationFiles = [];
 function updateApplicationView() {
   if ($('#applicationType').val().startsWith("upload")) {
     $('#applicationUpload').collapse('show');
-    $('#applicationSaveText').text('Upload and Save');
+    $('#applicationSaveText').text('Upload and Save'); }
+  else if ($('#applicationType').val().startsWith("gstreamer")){
+    $('#gstreamerData').collapse('show');
   } else {
     $('#applicationUpload').collapse('hide');
     $('#applicationSaveText').text('Save');
+    $('#gstreamerData').collapse('hide');
   }
   $('#applicationFile').val(null);
   applicationFiles = [];
@@ -781,7 +788,11 @@ $('#applicationFile').change(function() {
 $('#applicationSave').click(function() {
   var msg = {
     type: 'applicationSave',
-    applicationType: $('#applicationType').val()
+    applicationType: $('#applicationType').val(),
+    stationIP: $('#stationIP').val(),
+    camWidth: $('#camWidth').val(),
+    camHeight: $('#camHeight').val(),
+    camFrame: $('#camFrame').val()
   };
   connection.send(JSON.stringify(msg));
 

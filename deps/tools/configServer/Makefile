@@ -1,8 +1,6 @@
 IMG_VERSION?=$(shell git describe)
 DEPS_CFLAGS?=$(shell pkg-config --cflags cscore wpiutil)
 DEPS_LIBS?=$(shell pkg-config --libs --static cscore wpiutil)
-# TODO: Change this to reference FIRST_USER_NAME variable
-EXEC_HOME?=/home/fro
 FRC_JSON?=/boot/frc.json
 GST_JSON?=/boot/gst.json
 DHCPCD_CONF?=/boot/dhcpcd.conf

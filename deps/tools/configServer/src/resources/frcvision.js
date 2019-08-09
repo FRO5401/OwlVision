@@ -203,7 +203,6 @@ function connect() {
         $('#camWidth').val(msg.camWidth);
         $('#camHeight').val(msg.camHeight);
         $('#camFrame').val(msg.camFrame);
-        $('#videoDev').val(msg.videoDev);
         updateApplicationView();
         break;
       case 'applicationSaveComplete':
@@ -377,7 +376,6 @@ function updateVisionCameraView(camera, value) {
   camera.find('.cameraPixelFormat').val(value['pixel format']);
   camera.find('.cameraWidth').val(value.width);
   camera.find('.cameraHeight').val(value.height);
-  camera.find('.videoDev').val(value.device)
   camera.find('.cameraFps').val(value.fps);
   camera.find('.cameraBrightness').val(value.brightness);
   camera.find('.cameraWhiteBalance').val(value['white balance']);
@@ -594,7 +592,7 @@ $('#visionSave').click(function() {
     if (isNaN(value.fps)) {
       delete value["fps"];
     }
-    value.device = camera.find('.videoDev').val();
+
 
     var brightness = camera.find('.cameraBrightness').val();
     if (brightness !== '') {

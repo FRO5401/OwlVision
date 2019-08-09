@@ -97,7 +97,6 @@ void VisionStatus::UpdateCameraList() {
       jmode.emplace("width", mode.width);
       jmode.emplace("height", mode.height);
       jmode.emplace("fps", mode.fps);
-      jmode.emplace("device", mode.device)
 
       modes.emplace_back(jmode);
     }

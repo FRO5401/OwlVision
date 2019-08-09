@@ -49,7 +49,7 @@ function dismissStatus() {
 
 // Enable and disable buttons based on connection status
 var connectedButtonIds = ['systemRestart', 'networkApproach', 'networkAddress', 'networkMask', 'networkGateway', 'networkDNS', 'visionUp', 'visionDown', 'visionTerm', 'visionKill', 'systemReadOnly', 'systemWritable', 'visionClient', 'visionTeam', 'visionDiscard', 'addConnectedCamera', 'addCamera', 'applicationType'];
-var connectedButtonClasses = ['cameraName', 'cameraPath', 'cameraAlternatePaths', 'cameraPixelFormat', 'cameraWidth', 'cameraHeight', 'cameraFps', 'cameraBrightness', 'cameraWhiteBalance', 'cameraExposure', 'cameraProperties', 'streamWidth', 'streamHeight', 'streamFps', 'streamCompression', 'streamDefaultCompression', 'cameraRemove', 'cameraCopyConfig', 'cameraKey']
+var connectedButtonClasses = ['cameraName', 'cameraPath', 'cameraAlternatePaths', 'cameraPixelFormat', 'cameraWidth', 'cameraHeight', 'cameraFps', 'cameraBrightness', 'cameraWhiteBalance', 'cameraExposure', 'cameraProperties', 'streamWidth', 'streamHeight', 'streamFps', 'streamCompression', 'streamDefaultCompression', 'cameraRemove', 'cameraCopyConfig', 'cameraKey, videoDev']
 var writableButtonIds = ['networkSave', 'visionSave', 'applicationSave'];
 var systemStatusIds = ['systemMemoryFree1s', 'systemMemoryFree5s',
                        'systemMemoryAvail1s', 'systemMemoryAvail5s',
@@ -203,6 +203,7 @@ function connect() {
         $('#camWidth').val(msg.camWidth);
         $('#camHeight').val(msg.camHeight);
         $('#camFrame').val(msg.camFrame);
+        $('#videoDev').val(msg.videoDev);
         updateApplicationView();
         break;
       case 'applicationSaveComplete':
@@ -376,6 +377,7 @@ function updateVisionCameraView(camera, value) {
   camera.find('.cameraPixelFormat').val(value['pixel format']);
   camera.find('.cameraWidth').val(value.width);
   camera.find('.cameraHeight').val(value.height);
+  camera.find('.videoDev').val(value.device)
   camera.find('.cameraFps').val(value.fps);
   camera.find('.cameraBrightness').val(value.brightness);
   camera.find('.cameraWhiteBalance').val(value['white balance']);
@@ -592,6 +594,7 @@ $('#visionSave').click(function() {
     if (isNaN(value.fps)) {
       delete value["fps"];
     }
+    value.device = camera.find('.videoDev').val();
 
     var brightness = camera.find('.cameraBrightness').val();
     if (brightness !== '') {
@@ -792,7 +795,8 @@ $('#applicationSave').click(function() {
     stationIP: $('#stationIP').val(),
     camWidth: $('#camWidth').val(),
     camHeight: $('#camHeight').val(),
-    camFrame: $('#camFrame').val()
+    camFrame: $('#camFrame').val(),
+    videoDev: $('#videoDev').val(),
   };
   connection.send(JSON.stringify(msg));
 

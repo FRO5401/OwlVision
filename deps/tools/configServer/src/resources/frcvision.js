@@ -795,7 +795,6 @@ $('#applicationSave').click(function() {
     camWidth: $('#camWidth').val(),
     camHeight: $('#camHeight').val(),
     camFrame: $('#camFrame').val(),
-    videoSRC: $('#videoSRC').val()
   };
   connection.send(JSON.stringify(msg));
 

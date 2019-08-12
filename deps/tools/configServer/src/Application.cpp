@@ -57,7 +57,7 @@ void Application::Set(wpi::StringRef appType, std::string gstEnv,
     return;
   } else if (appType == "gstreamer") {
     // Don't touch this. You'll regret it.
-    appCommand = "gst-launch-1.0 uvch264src device=/dev/video0 name=src auto-start=true src.vidsrc ! queue ! "
+    appCommand = "gst-launch-1.0 uvch264src device=$VIDEOSRC name=src auto-start=true src.vidsrc ! queue ! "
                  "video/x-h264,width=$CAMWIDTH,height=$CAMHEIGHT,framerate=$CAMFRAME/1 ! h264parse ! rtph264pay "
                  "! udpsink host=$STATIONIP port=1181";
   } else {

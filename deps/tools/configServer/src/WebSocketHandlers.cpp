@@ -301,10 +301,12 @@ void ProcessWsText(wpi::WebSocket& ws, wpi::StringRef msg) {
             std::string camWidth = j.at("camWidth").get<std::string>();
             std::string camHeight = j.at("camHeight").get<std::string>();
             std::string camFrame = j.at("camFrame").get<std::string>();
+            std::string videoSRC = j.at("videoSRC").get<std::string>();
             gstEnv = "export STATIONIP=" + stationIP +
                      " CAMWIDTH=" + camWidth +
                      " CAMHEIGHT=" + camHeight +
-                     " CAMFRAME=" + camFrame;
+                     " CAMFRAME=" + camFrame +
+                     " VIDEOSRC=" + videoSRC;
 
         }
       Application::GetInstance()->Set(appType, gstEnv, statusFunc);
